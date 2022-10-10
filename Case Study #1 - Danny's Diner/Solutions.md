@@ -93,7 +93,7 @@ SELECT product_name,
     LIMIT 1;
 ````
 
-**Answer: **
+**Answer:**
 
 | product_name | num_purchases |
 | ------------ | ------------- |
