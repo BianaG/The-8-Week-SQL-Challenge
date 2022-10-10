@@ -45,4 +45,37 @@ ORDER BY num_visit_days DESC;
 
 ***
 
+**3. What was the first item from the menu purchased by each customer?**
+````sql
+SELECT customer_id,
+           product_name AS first_purchased_item
+           
+    FROM (SELECT DISTINCT customer_id,
+                           product_id
+          FROM dannys_diner.sales
+          WHERE order_date IN (SELECT MIN(order_date) AS first_date
+                               FROM dannys_diner.sales
+                               GROUP BY customer_id)) AS first_prod_id
+                               
+    LEFT JOIN dannys_diner.menu AS me
+    ON first_prod_id.product_id = me.product_id;
 
+````
+
+
+**Answer:**
+
+| customer_id | first_purchased_item |
+| ----------- | -------------------- |
+| A           | sushi                |
+| A           | curry                |
+| B           | curry                |
+| C           | ramen                |
+
+***
+
+**4. What is the most purchased item on the menu and how many times was it purchased by all customers?**
+````sql
+
+
+````
