@@ -8,8 +8,10 @@
 SELECT
 customer_id,
 SUM(price) AS amount_spent
+
 FROM dannys_diner.sales JOIN dannys_diner.menu
 ON sales.product_id = menu.product_id
+
 GROUP BY customer_id
 ORDER BY amount_spent DESC;
 ````
@@ -26,12 +28,12 @@ ORDER BY amount_spent DESC;
 **2. How many days has each customer visited the restaurant?**
 ````sql
 SELECT customer_id,
-           COUNT(DISTINCT(order_date)) AS num_visit_days
-           
-    FROM dannys_diner.sales
-    GROUP BY customer_id
-    ORDER BY num_visit_days DESC;
-    ````
+       COUNT(DISTINCT(order_date)) AS num_visit_days
+
+FROM dannys_diner.sales
+GROUP BY customer_id
+ORDER BY num_visit_days DESC;
+````
     
 **Answer:**
 
