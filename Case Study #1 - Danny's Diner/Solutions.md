@@ -22,6 +22,7 @@ ORDER BY amount_spent DESC;
 | C           | 36           |
 
 ***
+
 **2. How many days has each customer visited the restaurant?**
 ````sql
     SELECT customer_id,
@@ -33,12 +34,13 @@ ORDER BY amount_spent DESC;
     ````
     
 **Answer:**
+
 | customer_id | num_visit_days |
 | ----------- | -------------- |
 | B           | 6              |
 | A           | 4              |
 | C           | 2              |
 
----
+***
 
 
