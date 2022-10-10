@@ -25,7 +25,7 @@ ORDER BY amount_spent DESC;
 
 **2. How many days has each customer visited the restaurant?**
 ````sql
-    SELECT customer_id,
+SELECT customer_id,
            COUNT(DISTINCT(order_date)) AS num_visit_days
            
     FROM dannys_diner.sales
