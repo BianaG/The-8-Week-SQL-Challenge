@@ -102,3 +102,36 @@ SELECT product_name,
 ***
 
 **5. Which item was the most popular for each customer?**
+````sql
+SELECT r.customer_id,
+       me.product_name,
+       r.num_prod
+           
+    FROM(SELECT
+      	customer_id,
+        product_id,
+        COUNT(product_id) AS num_prod,
+        DENSE_RANK()
+        OVER(PARTITION BY customer_id ORDER BY COUNT(product_id) DESC) AS rank_prod
+        FROM dannys_diner.sales
+        GROUP BY customer_id, product_id) AS r
+        
+    LEFT JOIN dannys_diner.menu AS me
+    ON r.product_id = me.product_id
+    
+    WHERE r.rank_prod = 1
+    ORDER BY customer_id;
+````
+
+
+**Answer:**
+
+| customer_id | product_name | num_prod |
+| ----------- | ------------ | -------- |
+| A           | ramen        | 3        |
+| B           | sushi        | 2        |
+| B           | curry        | 2        |
+| B           | ramen        | 2        |
+| C           | ramen        | 3        |
+
+***
