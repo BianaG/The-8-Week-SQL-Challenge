@@ -210,4 +210,35 @@ SELECT r.customer_id,
 
 ---
 
+**8. What is the total items and amount spent for each member before they became a member?**
+````sql
 
+    WITH cus_join_date AS
+    (
+      SELECT s.customer_id,
+             mem.join_date,
+             s.product_id
+      FROM dannys_diner.sales AS s
+      LEFT JOIN dannys_diner.members AS mem
+      ON s.customer_id = mem.customer_id
+      WHERE s.order_date < mem.join_date
+    )
+      
+      SELECT cjd.customer_id,
+             COUNT(cjd.product_id) AS num_items,
+             cjd.join_date,
+             SUM(me.price) AS money_spent
+      FROM cus_join_date AS cjd
+      LEFT JOIN dannys_diner.menu AS me
+      ON cjd.product_id = me.product_id
+      GROUP BY cjd.customer_id, cjd.join_date
+      ORDER BY cjd.customer_id;
+ ````
+ **Answer:**
+
+| customer_id | num_items | join_date                | money_spent |
+| ----------- | --------- | ------------------------ | ----------- |
+| A           | 2         | 2021-01-07T00:00:00.000Z | 25          |
+| B           | 3         | 2021-01-09T00:00:00.000Z | 40          |
+
+---
